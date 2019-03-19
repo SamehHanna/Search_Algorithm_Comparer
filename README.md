@@ -1,4 +1,5 @@
 Python project-Search algorith comparer
+
 The main aim is to implement the visualization and comparison of different searching algorithms.
 
 Introduction: There are several search algorithms used in Artificial Intelligence each differ in how to find the next state and choose the action from different available states. They seek the same goal for the same problem in the search space, but they still can differ in their performance. Based on the technique used and the problem itself, they can end up with different solutions (or no solution at all). Some can find the optimal solution, some check all available solutions, and some can end up with no solution at all. This project purpose: is to do a graphical representation for the main uninformed search algorithms and identify the characteristics of each algorithm in a graphical way. These characteristics are:
