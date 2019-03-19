@@ -43,7 +43,8 @@ class Problem:
         # Looping on the column names to find each state
         for name in df.columns[1:]:
             i=0
-            c=State(name)
+            enc_name=name.encode('ascii','ignore')
+            c=State(enc_name)
             #looping on the row to find each child of state
             for state in df[name]:
                 if (not math.isnan(state)):
