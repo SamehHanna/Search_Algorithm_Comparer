@@ -9,6 +9,7 @@ Contains BFS and DFS algorithms
 """
 
 import DataRepresentation as dr #dr stands for data representation
+import ProfTrial
 p=dr.Problem()
 lst=p.readProblem("Problem.xlsx")
 #p.showProblem()
@@ -41,7 +42,7 @@ def isMember(s, lst_of_states):
 def findStateByName(s_name,lst_states):
     for stored_s in lst_states:
         if stored_s.name==s_name:
-			return stored_s
+            return stored_s
     return dr.State('not_found')
 
 #reconstruation of the path based on the saved key - value pairs during search
@@ -57,6 +58,7 @@ def path_backtracking(fromDict,startValue,goalState):
     return path
     
 #BFS
+@ProfTrial.Profile_Decoder
 def bfs(start, goalFunction,all_states):
     #dict for backtracking the found path
     #key: the state, value: from where we got there
@@ -97,6 +99,7 @@ found_path=bfs(lst[0], goal_test,lst)
 print(found_path)
 
 #DFS
+@ProfTrial.Profile_Decoder
 def dfs(start, goalFunction,all_states):
     from_dict=dict()
     from_state='START'
