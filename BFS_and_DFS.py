@@ -133,3 +133,6 @@ def dfs(start, goalFunction,all_states):
 found_path_dfs=dfs(lst[0], goal_test,lst)
 print(found_path_dfs)
 
+p.generateEdges()
+p.plotPath(found_path)
+p.plotPath(found_path_dfs)
