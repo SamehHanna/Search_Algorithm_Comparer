@@ -134,5 +134,5 @@ found_path_dfs=dfs(lst[0], goal_test,lst)
 print(found_path_dfs)
 
 p.generateEdges()
-p.plotPath(found_path)
-p.plotPath(found_path_dfs)
+p.plotPath(found_path,"pb.jpg")
+p.plotPath(found_path_dfs,"pd.jpg")
