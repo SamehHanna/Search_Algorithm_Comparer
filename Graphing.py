@@ -9,13 +9,14 @@ import pandas as pd
 #import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 #import DataRepresentation as dr
 
 #p=dr.Problem() # Initiate object or  to copy from another "problem (list of states)"
 #lst=p.readProblem("Problem.xlsx")
 #fromToLst=p.generateEdges()
 
-def plotting(fromToLst,path=False):
+def plotting(fromToLst,fname="graph.jpg",path=False):
     """Function used to build the graph for all the Nodes and Edges
     inputs:
         -fromToList[0] contains the lists used to plot the nodes
@@ -54,5 +55,8 @@ def plotting(fromToLst,path=False):
             linewidths=20, pos=nx.spring_layout(G))
         
     #plt.colorbar(carac)
-    plt.show()
-
+    """insteads showing on console it save as image"""
+    #plt.show()
+    plt.savefig(fname)
+    plt.clf()
+    
