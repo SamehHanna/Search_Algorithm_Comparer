@@ -83,7 +83,7 @@ class Problem:
         gr.plotting([from_lst,to_lst,state_name,color_lst])
     
     @classmethod
-    def plotPath(self,path=[]):
+    def plotPath(self,path=[], fname="graph.jpg"):
         """ Generate/Draw the Nodes(states) and Edges (actions)
         for a certain path"""
         if (len(path)==0):
@@ -92,7 +92,8 @@ class Problem:
         to_lst=path[1:]
         color_lst=list(range(0,len(path))) 
         state_name=path 
-        gr.plotting([from_lst,to_lst,state_name,color_lst],True)
+        gr.plotting([from_lst,to_lst,state_name,color_lst],fname,True)
+
         
         
 '''
