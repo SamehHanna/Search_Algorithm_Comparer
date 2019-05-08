@@ -65,7 +65,7 @@ class Problem:
             print (state.children)
     
     @classmethod
-    def generateEdges(self):
+    def generateEdges(self,fname="graph_whole.jpg"):
         """ Generate/Draw the Nodes(states) and Edges (actions)
         between parents and children"""
         from_lst=[] # Starting/Parent of Edge
@@ -80,7 +80,7 @@ class Problem:
                 to_lst.append(child)
         color_lst[0]="start"
         color_lst[len(color_lst)-1]="end"
-        gr.plotting([from_lst,to_lst,state_name,color_lst])
+        gr.plotting([from_lst,to_lst,state_name,color_lst],fname,True)
     
     @classmethod
     def plotPath(self,path=[], fname="graph.jpg"):
