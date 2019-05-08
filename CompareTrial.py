@@ -6,7 +6,15 @@ Created on Fri May  3 10:54:06 2019
 """
 import os
 from collections import defaultdict
+import sys
 
+orig_stdout = sys.stdout
+f = open('out.txt', 'w')
+sys.stdout = f
+
+
+
+output=""
 names=[] #List of all algorithms running
 values=[] # list of all dictionaries of the algorithms
 # loop on all files in the current directory
@@ -46,6 +54,7 @@ for name in names:
 title_line+="\n"+"-"*len(title_line)+"\n"
 print (title_line)
 
+
 #Printing the comparison per each item 
 for key in allkeys:
     line="{:^25}".format(key)+" "
@@ -55,3 +64,6 @@ for key in allkeys:
         else:
             line+= "| "+"{:^25}".format("0")+ " "
     print (line)
+
+sys.stdout = orig_stdout
+f.close()
