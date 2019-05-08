@@ -8,11 +8,13 @@ import BFS_and_DFS as alg
 
 import tkinter as tk #library for gui
 from PIL import Image, ImageTk #library to convert image format
-#from tkFileDialog   import askopenfilename #for the menu
+from tkFileDialog   import askopenfilename #for the menu
+import CompareTrial as comp
 
 
 class MainApplication(tk.Frame):
     def __init__(self, root):
+        
         self.root = root
         self.frame = tk.Frame(self.root)
         """logical variables for consistency"""
@@ -22,6 +24,8 @@ class MainApplication(tk.Frame):
         """Saved paths"""
         self.path_dfs=[];
         self.path_bfs=[];
+        #self.graph_fname="Problem.xlsx"
+        self.graph_fname=""
         
         """CREATING THE STRUCTURAL ELEMENTS"""
     
@@ -67,50 +71,78 @@ class MainApplication(tk.Frame):
         self.filemenu = tk.Menu(self.menu)
         self.menu.add_cascade(label="File", menu=self.filemenu)
         self.filemenu.add_command(label="Open...", command=self.OpenFile)
+        
         '''Text widget for compared results'''
         self.scroll_comp = tk.Scrollbar(self.root)
         self.txt_comp = tk.Text(self.root, height=10, width=50)
         self.scroll_comp.config(command=self.txt_comp.yview)
         self.txt_comp.config(yscrollcommand=self.scroll_comp.set)
-        self.scroll_comp.grid(row=4, column=2, sticky='W')
-        self.txt_comp.grid(row=4, column=1)
-        self.txt_comp.insert(tk.END, "Just a text Widget\nin two lines\nlines\nlines\nlines\nlines\n")
+        self.scroll_comp.grid(row=4, column=3, sticky=tk.N+tk.S+tk.W)
+        self.txt_comp.grid(row=4, column=1,columnspan=2,sticky=tk.N+tk.S+tk.W+tk.E)
+        self.txt_comp.insert(tk.END, "Compared results\nhere\n")
+        
+        '''Button to see compared results'''
+        self.button_comp=tk.Button(root, text='Show compared results', width=25, command=self.comp_button)
+        self.button_comp.grid(row=3, column=1,sticky=tk.W)
 
     """FUNCTIONS FOR WIDGETS"""
+    def comp_button(self):
+        newt="changed"
+        self.txt_comp.delete('1.0', tk.END)
+        if (self.bfs_done and self.dfs_done):
+            fcompname='out_comp.txt'
+            comp.comparism(fcompname)
+            with open(fcompname) as fc:  
+               line = fc.readline()
+               while line:
+                   line = fc.readline()
+                   self.txt_comp.insert(tk.END, line)
+            fc.close()
+            self.txt_comp.insert(tk.END, newt)
+            self.root.update_idletasks()
+        
     
     
     def bfs_button(self):
         '''run BFS and show results'''
         if (self.loaded and not self.bfs_done):
-            found_path=alg.bfs()
+            fname="graph_bfs.jpg"
+            found_path=alg.algorithm_caller(self.graph_fname, 1, fname)
             self.path_bfs=found_path
             self.msg_bfs.config(text="BFS: "+str(found_path))
             self.msg_bfs.text="BFS:"+str(found_path)
             
-            fname="graph_bfs.jpg"
-            alg.p.plotPath(found_path,fname)    
-        
-            im=Image.open(fname)
-            photo_bfs=ImageTk.PhotoImage(im)   
+            #fname="graph_bfs.jpg"
+            #alg.p.plotPath(found_path,fname)    
+            if (found_path):
+                im=Image.open(fname)
+                photo_bfs=ImageTk.PhotoImage(im)
+            else:
+                im=Image.open('blank.jpg')
+                photo_bfs=ImageTk.PhotoImage(im)
             self.label_bfs.configure(image=photo_bfs)
             self.label_bfs.image = photo_bfs
+            
             self.bfs_done=True
     
         
     def dfs_button(self):
         '''run DFS and show results'''
         if (self.loaded and not self.dfs_done):
-            found_path=alg.dfs()
+            fname="graph_dfs.jpg"
+            found_path=alg.algorithm_caller(self.graph_fname, 2, fname)
             self.path_dfs=found_path
             
             self.msg_dfs.config(text="DFS:"+str(found_path))
             self.msg_dfs.text=("DFS:"+str(found_path))
-            
-            fname="graph_dfs.jpg"
-            alg.p.plotPath(found_path,fname)    
         
-            im=Image.open(fname)
-            photo_dfs=ImageTk.PhotoImage(im)   
+            if (found_path):
+                im=Image.open(fname)
+                photo_dfs=ImageTk.PhotoImage(im)
+            else:
+                im=Image.open('blank.jpg')
+                photo_dfs=ImageTk.PhotoImage(im)
+                
             self.label_dfs.configure(image=photo_dfs)
             self.label_dfs.image = photo_dfs
             self.dfs_done=True
@@ -122,10 +154,12 @@ class MainApplication(tk.Frame):
             self.dfs_done=False
         else:
             self.loaded=True
-        #graph_file_name = askopenfilename()
-        #lst = p.readProblem(graph_file_name)
+            
+        self.graph_fname = askopenfilename(title="Select files")
+        
         fname="graph_whole.jpg"
-        alg.p.generateEdges(fname)    
+        #alg.p.generateEdges(fname)
+        alg.algorithm_caller(self.graph_fname, 3, fname)
         im=Image.open(fname)
         photo_graph=ImageTk.PhotoImage(im)
     
@@ -139,3 +173,4 @@ if __name__ == "__main__":
     root = tk.Tk()
     app=MainApplication(root)
     root.mainloop()
+    
