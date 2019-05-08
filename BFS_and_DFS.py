@@ -59,7 +59,7 @@ def path_backtracking(fromDict,startValue,goalState):
     
 #BFS
 @ProfTrial.Profile_Decoder
-def bfs(start, goalFunction,all_states):
+def bfs(start=lst[0], goalFunction=goal_test,all_states=lst):
     #dict for backtracking the found path
     #key: the state, value: from where we got there
     from_dict=dict()
@@ -100,7 +100,7 @@ print(found_path)
 
 #DFS
 @ProfTrial.Profile_Decoder
-def dfs(start, goalFunction,all_states):
+def dfs(start=lst[0], goalFunction=goal_test,all_states=lst):
     from_dict=dict()
     from_state='START'
     from_dict[start.name]=from_state
@@ -132,7 +132,8 @@ def dfs(start, goalFunction,all_states):
 #run the search from the first state
 found_path_dfs=dfs(lst[0], goal_test,lst)
 print(found_path_dfs)
-
+'''
 p.generateEdges()
 p.plotPath(found_path,"pb.jpg")
 p.plotPath(found_path_dfs,"pd.jpg")
+'''
