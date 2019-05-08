@@ -67,6 +67,14 @@ class MainApplication(tk.Frame):
         self.filemenu = tk.Menu(self.menu)
         self.menu.add_cascade(label="File", menu=self.filemenu)
         self.filemenu.add_command(label="Open...", command=self.OpenFile)
+        '''Text widget for compared results'''
+        self.scroll_comp = tk.Scrollbar(self.root)
+        self.txt_comp = tk.Text(self.root, height=10, width=50)
+        self.scroll_comp.config(command=self.txt_comp.yview)
+        self.txt_comp.config(yscrollcommand=self.scroll_comp.set)
+        self.scroll_comp.grid(row=4, column=2, sticky='W')
+        self.txt_comp.grid(row=4, column=1)
+        self.txt_comp.insert(tk.END, "Just a text Widget\nin two lines\nlines\nlines\nlines\nlines\n")
 
     """FUNCTIONS FOR WIDGETS"""
     
