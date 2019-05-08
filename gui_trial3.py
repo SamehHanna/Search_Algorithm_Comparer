@@ -87,7 +87,6 @@ class MainApplication(tk.Frame):
 
     """FUNCTIONS FOR WIDGETS"""
     def comp_button(self):
-        newt="changed"
         self.txt_comp.delete('1.0', tk.END)
         if (self.bfs_done and self.dfs_done):
             fcompname='out_comp.txt'
@@ -98,7 +97,6 @@ class MainApplication(tk.Frame):
                    line = fc.readline()
                    self.txt_comp.insert(tk.END, line)
             fc.close()
-            self.txt_comp.insert(tk.END, newt)
             self.root.update_idletasks()
         
     
