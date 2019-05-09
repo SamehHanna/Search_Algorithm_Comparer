@@ -6,10 +6,8 @@ Created on Mon Apr 22 08:42:25 2019
 """
 # libraries
 import pandas as pd
-#import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
-import matplotlib as mpl
 #import DataRepresentation as dr
 
 #p=dr.Problem() # Initiate object or  to copy from another "problem (list of states)"
